@@ -1,5 +1,5 @@
 #include <DHT.h> //온습도센서를 사용하기위해 전용라이브러리를 불러온다
-#define DHTPIN 4 //온습도센서를 4번핀으로 설정
+#define DHTPIN 13 //온습도센서를 13번핀으로 설정
 #define DHTTYPE DHT22 //온습도센서 종류설정
 DHT dht (DHTPIN,DHTTYPE);
 #include <ESP8266WiFi.h>
@@ -14,7 +14,7 @@ DHT dht (DHTPIN,DHTTYPE);
  * Modification: Added code to read from analog photo sensor to demonstrate reading input over WIFI.
  */
  
-const char* ssid = "nextop";
+const char* ssid = "Nextop1";
 const char* password = "20183365";
  
 
@@ -67,7 +67,9 @@ void loop() {
   // Wait until the client sends some data
   Serial.println("new client");
   while(!client.available()){
-    delay(1);
+
+    Serial.println(",");
+    //delay(1);
   }
  
   // Read the first line of the request
