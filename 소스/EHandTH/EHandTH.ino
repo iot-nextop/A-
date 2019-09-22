@@ -3,6 +3,8 @@
 #define DHTTYPE DHT22
 DHT dht (DHTPIN,DHTTYPE);
 
+
+
 void setup() {
   Serial.begin(9600);
 
@@ -10,11 +12,15 @@ void setup() {
 
 void loop() {
   delay(2000);
-  int h =dht.readHumidity();
+  int soil = analogRead(A0);
+  int h = dht.readHumidity();
   int t = dht.readTemperature();
+  Serial.print("토양습도:");
+  Serial.println(soil);
   Serial.print("습도:");
   Serial.println(h);
   Serial.print("온도:");
   Serial.println(t);
+  Serial.print("---------");
 
 }
