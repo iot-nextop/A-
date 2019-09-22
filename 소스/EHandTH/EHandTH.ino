@@ -1,4 +1,4 @@
-#include <DHT.h>
+#include <DHT.h> //온습도센서를 사용하기위해 전용라이브러리를 불러온다
 #define DHTPIN 2 //온습도센서를 2번핀으로 설정
 #define DHTTYPE DHT22 //온습도센서 종류설정
 DHT dht (DHTPIN,DHTTYPE);
@@ -21,6 +21,5 @@ void loop() {
   Serial.println(h);
   Serial.print("온도:");
   Serial.println(t);
-  Serial.print("---------");
-
+  Serial.println("---------");
 }
