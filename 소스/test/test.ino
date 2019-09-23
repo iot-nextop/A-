@@ -14,8 +14,8 @@ DHT dht (DHTPIN,DHTTYPE);
  * Modification: Added code to read from analog photo sensor to demonstrate reading input over WIFI.
  */
  
-const char* ssid = "Nextop1";
-const char* password = "20183365";
+const char* ssid = "";
+const char* password = "";
  
 
 
