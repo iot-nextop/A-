@@ -15,7 +15,7 @@ DHT dht (DHTPIN,DHTTYPE);
  */
  
 const char* ssid = "Nextop1";
-const char* password = "20183365";
+const char* password ="20183365";
  
 
 
@@ -24,6 +24,8 @@ WiFiServer server(80);
 void setup() {
   Serial.begin(115200);
   delay(10);
+
+
 
   // Connect to WiFi network
   Serial.println();
@@ -56,11 +58,13 @@ void loop() {
   int soil = analogRead(A0); //아날로그 0번핀에서 토양습도센서값을 불러온다
   int h = dht.readHumidity(); //온습도센서의 습도값을 불러온다
   int t = dht.readTemperature(); //온습도센서의 온도값을 불러온다
+  int cds = digitalRead(12);//
 
   
   // Check if a client has connected
   WiFiClient client = server.available();
   if (!client) {
+    
     return;
   }
  
@@ -68,7 +72,6 @@ void loop() {
   Serial.println("new client");
   while(!client.available()){
 
-    Serial.println(",");
     //delay(1);
   }
  
@@ -89,24 +92,36 @@ void loop() {
   client.println(""); //  do not forget this one
   client.println("<!DOCTYPE HTML>");
   client.println("<html>");
+  client.println("<body>");
 
-
-  
-  client.println("<p>토양습도:<b> ");
+  client.println("<table border=1 width=300 height=300>");
+  client.println("<tr>");
+  client.println("<th>soil:<b> ");
   client.println(soil);
-  client.println("</b></p>");
+  client.println("</b></th>");
+  client.println("</tr>");
 
-  client.println("<p>온도:<b> ");
+
+  client.println("<tr>");
+  client.println("<th>temp:<b> ");
   client.println(t);
-  client.println("</b></p>");
+  client.println("</b></th>");
+  client.println("</tr>");
   
-  client.println("<p>습도:<b> ");
+  client.println("<tr>");
+  client.println("<th>humi:<b> ");
   client.println(h);
-  client.println("</b></p>");
+  client.println("</b></th>");
+  client.println("</tr>");
   
-  client.println("<a href=\"?cmd=RELOAD_soil\"><button>EH</button></a>");
-  client.println("<a href=\"?cmd=RELOAD_t\"><button>t</button></a>");
-  client.println("<a href=\"?cmd=RELOAD_h\"><button>h</button></a>");
+  client.println("</table>");
+  client.println("</body>");
+
+  
+  client.println("<a href=\"?cmd=RELOAD_soil\"><button>soil</button></a>");
+  client.println("<a href=\"?cmd=RELOAD_t\"><button>temp</button></a>");
+  client.println("<a href=\"?cmd=RELOAD_h\"><button>humi</button></a>");
+
 
   client.println("</html>");
  
