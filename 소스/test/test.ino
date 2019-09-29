@@ -108,13 +108,6 @@ void loop() {
   client.println("<a href=\"?cmd=RELOAD_t\"><button>t</button></a>");
   client.println("<a href=\"?cmd=RELOAD_h\"><button>h</button></a>");
 
-  Serial.println("토양습도");
-  Serial.println(soil);
-  Serial.println("온도");
-  Serial.println(t);
-  Serial.println("습도");
-  Serial.println(h);
-  
   client.println("</html>");
  
   delay(1);
