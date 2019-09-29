@@ -14,8 +14,8 @@ DHT dht (DHTPIN,DHTTYPE);
  * Modification: Added code to read from analog photo sensor to demonstrate reading input over WIFI.
  */
  
-const char* ssid = "";
-const char* password = "";
+const char* ssid = "Nextop1";
+const char* password = "20183365";
  
 
 
@@ -92,15 +92,15 @@ void loop() {
 
 
   
-  client.println("<p>EH:<b> ");
+  client.println("<p>토양습도:<b> ");
   client.println(soil);
   client.println("</b></p>");
 
-  client.println("<p>t:<b> ");
+  client.println("<p>온도:<b> ");
   client.println(t);
   client.println("</b></p>");
   
-  client.println("<p>h:<b> ");
+  client.println("<p>습도:<b> ");
   client.println(h);
   client.println("</b></p>");
   
@@ -108,11 +108,11 @@ void loop() {
   client.println("<a href=\"?cmd=RELOAD_t\"><button>t</button></a>");
   client.println("<a href=\"?cmd=RELOAD_h\"><button>h</button></a>");
 
-  Serial.println("EH");
+  Serial.println("토양습도");
   Serial.println(soil);
-  Serial.println("EH");
+  Serial.println("온도");
   Serial.println(t);
-  Serial.println("EH");
+  Serial.println("습도");
   Serial.println(h);
   
   client.println("</html>");
