@@ -113,20 +113,20 @@ void loop() {
   client.println("<table border=1 width=300 height=300>");
   client.println("<tr>");
   client.println("<th>soil:<b> ");
-  client.println(FB_soil);
+  client.println(soil);
   client.println("</b></th>");
   client.println("</tr>");
 
 
   client.println("<tr>");
   client.println("<th>temp:<b> ");
-  client.println(FB_t);
+  client.println(t);
   client.println("</b></th>");
   client.println("</tr>");
   
   client.println("<tr>");
   client.println("<th>humi:<b> ");
-  client.println(FB_h);
+  client.println(h);
   client.println("</b></th>");
   client.println("</tr>");
 
@@ -156,9 +156,9 @@ if (request.indexOf("GET /C")>=0)
           FB_soil = soil;
           FB_t = t;
           FB_h = h;
-          Firebase.setInt("earthhumidity",FB_soil);
-          Firebase.setInt("temperature",FB_t);
-          Firebase.setInt("humidity",FB_h);
+          Firebase.pushInt("earthhumidity",FB_soil);
+          Firebase.pushInt("temperature",FB_t);
+          Firebase.pushInt("humidity",FB_h);
           Serial.println("check");
        
   }
