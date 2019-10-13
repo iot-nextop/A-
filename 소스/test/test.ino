@@ -140,8 +140,8 @@ void loop() {
   client.println("</body>");
 
   client.println("<a href=\"/C\"><button>button </button></a>");
-  client.println("<a href=\"/P\"><button>pumpON </button></a>");
-  client.println("<a href=\"/Pf\"><button>pumpOFF </button></a>");
+  client.println("<a href=\"/P\"><button>pumpOFF </button></a>");
+  client.println("<a href=\"/Pf\"><button>pumpON </button></a>");
   //client.println("<a href=\"?cmd=RELOAD_soil\"><button>soil</button></a>");
   //client.println("<a href=\"?cmd=RELOAD_t\"><button>temp</button></a>");
   //client.println("<a href=\"?cmd=RELOAD_h\"><button>humi</button></a>");
