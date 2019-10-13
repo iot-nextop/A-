@@ -1,7 +1,7 @@
 #include <DHT.h> //온습도센서를 사용하기위해 전용라이브러리를 불러온다
 #define DHTPIN 13 //온습도센서를 13번핀으로 설정
 #define DHTTYPE DHT22 //온습도센서 종류설정
-#define CONTROL_PIN 12 //펌프용
+#define pump 12 //펌프용
 DHT dht (DHTPIN,DHTTYPE);
 #include <ESP8266WiFi.h>
 #include <FirebaseArduino.h>
@@ -32,8 +32,7 @@ void setup() {
   delay(10);
 
   //펌프용
-  pinMode(CONTROL_PIN, OUTPUT);
-  digitalWrite(CONTROL_PIN, LOW);
+  pinMode(pump, OUTPUT);
 
   // Connect to WiFi network
   Serial.println();
@@ -150,31 +149,32 @@ void loop() {
 
   client.println("</html>");
 
-if (request.indexOf("GET /C")>=0)
+  if (request.indexOf("GET /C")>=0)
   {
-      
-          FB_soil = soil;
-          FB_t = t;
-          FB_h = h;
-          Firebase.pushInt("earthhumidity",FB_soil);
-          Firebase.pushInt("temperature",FB_t);
-          Firebase.pushInt("humidity",FB_h);
-          Serial.println("check");
-       
+      FB_soil = soil;
+      FB_t = t;
+      FB_h = h;
+      Firebase.pushInt("earthhumidity",FB_soil);
+      Firebase.pushInt("temperature",FB_t);
+      Firebase.pushInt("humidity",FB_h);
+      Serial.println("check");
   }
-if (request.indexOf("GET /P")>=0)
-{
-   digitalWrite(CONTROL_PIN, HIGH);
+
+
+  
+  if (request.indexOf("GET /P")>=0)
+  {
+   digitalWrite(pump, HIGH);
    FB_pump = 1;
    Firebase.setInt("pump",FB_pump);
-}
+  }
 
-if (request.indexOf("GET /Pf")>=0)
-{
-   digitalWrite(CONTROL_PIN, LOW);
+  if (request.indexOf("GET /Pf")>=0)
+  {
+   digitalWrite(pump, LOW);
    FB_pump = 0;
    Firebase.setInt("pump",FB_pump);
-}
+  }
 
  
   delay(1);
