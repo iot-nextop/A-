@@ -24,6 +24,7 @@ int FB_h;
 int FB_t;
 int FB_soil;
 int FB_pump;
+float FB_predict;
 
 WiFiServer server(80);
  
@@ -64,6 +65,8 @@ void setup() {
   FB_h = Firebase.getInt("humidity");
   FB_t = Firebase.getInt("temperature");
   FB_pump = Firebase.getInt("pump");
+  FB_predict = Firebase.getFloat("predict");
+  
   
 }
  
@@ -73,6 +76,7 @@ void loop() {
   int h = dht.readHumidity(); //온습도센서의 습도값을 불러온다
   int t = dht.readTemperature(); //온습도센서의 온도값을 불러온다
   int cds = digitalRead(12);//
+  
 
 
   
@@ -134,9 +138,11 @@ void loop() {
   client.println(FB_pump);
   client.println("</b></th>");
   client.println("</tr>");
-  
-  client.println("</table>");
 
+  client.println("<b> predict:");
+  client.println(FB_predict);
+  client.println("</b>");
+  
   client.println("</body>");
 
   client.println("<a href=\"/C\"><button>button </button></a>");
