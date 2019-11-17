@@ -24,7 +24,7 @@ int FB_h;
 int FB_t;
 int FB_soil;
 int FB_pump;
-float FB_predict;
+int FB_predict;
 
 WiFiServer server(80);
  
@@ -65,7 +65,7 @@ void setup() {
   FB_h = Firebase.getInt("humidity");
   FB_t = Firebase.getInt("temperature");
   FB_pump = Firebase.getInt("pump");
-  FB_predict = Firebase.getFloat("predict");
+  FB_predict = Firebase.getInt("예측값 log");
   
   
 }
@@ -107,7 +107,7 @@ void loop() {
   // Return the response
   client.println("HTTP/1.1 200 OK");
   client.println("Content-Type: text/html");
-  //client.println( "Refresh: 20");        // refresh the page automatically every 20 sec
+  client.println( "Refresh: 10");        // refresh the page automatically every 20 se
   client.println(""); //  do not forget this one
   client.println("<!DOCTYPE HTML>");
   client.println("<html>");
@@ -139,32 +139,30 @@ void loop() {
   client.println("</b></th>");
   client.println("</tr>");
 
-  client.println("<b> predict:");
+  client.println("<tr>");
+  client.println("<th>predict : <b> ");
   client.println(FB_predict);
-  client.println("</b>");
+  client.println("</b></th>");
+  client.println("</tr>");
   
   client.println("</body>");
 
   client.println("<a href=\"/C\"><button>button </button></a>");
   client.println("<a href=\"/P\"><button>pumpOFF </button></a>");
   client.println("<a href=\"/Pf\"><button>pumpON </button></a>");
-  //client.println("<a href=\"?cmd=RELOAD_soil\"><button>soil</button></a>");
-  //client.println("<a href=\"?cmd=RELOAD_t\"><button>temp</button></a>");
-  //client.println("<a href=\"?cmd=RELOAD_h\"><button>humi</button></a>");
 
 
   client.println("</html>");
-
-  if (request.indexOf("GET /C")>=0)
-  {
-      FB_soil = soil;
-      FB_t = t;
-      FB_h = h;
-      Firebase.pushInt("earthhumidity",FB_soil);
-      Firebase.pushInt("temperature",FB_t);
-      Firebase.pushInt("humidity",FB_h);
-      Serial.println("check");
-  }
+  //if (request.indexOf("GET /C")>=0)
+   delay(10000);
+   FB_soil = soil;
+   FB_t = t;
+   FB_h = h;
+   Firebase.pushInt("earthhumidity",FB_soil);
+   Firebase.pushInt("temperature",FB_t);
+   Firebase.pushInt("humidity",FB_h);
+   Serial.println("check");
+  
 
 
   
